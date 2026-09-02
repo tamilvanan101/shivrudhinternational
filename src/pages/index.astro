@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { FEATURED } from '../data/products';
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-spice-800 text-cream-50">
+    <div
+      class="absolute inset-0 opacity-20"
+      style="background-image: radial-gradient(circle at 20% 30%, #e6a817 0, transparent 35%), radial-gradient(circle at 80% 70%, #729c63 0, transparent 40%);"
+    >
+    </div>
+    <div class="relative mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2 md:items-center md:py-28">
+      <div>
+        <span class="inline-block rounded-full bg-spice-700 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-gold-400">
+          Exporters from Tamil Nadu, India
+        </span>
+        <h1 class="mt-5 font-serif text-4xl font-bold leading-tight sm:text-5xl">
+          Spices &amp; agri produce, sourced at origin.
+        </h1>
+        <p class="mt-5 max-w-lg text-lg leading-relaxed text-cream-200">
+          Shivrudh International connects global buyers with the finest Madurai
+          jasmine, Erode turmeric and South Indian spices &mdash; graded for
+          export and delivered with reliability.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/quote"
+            class="rounded-lg bg-gold-500 px-6 py-3 font-semibold text-spice-900 shadow-sm transition hover:bg-gold-400"
+          >
+            Request a Quote
+          </a>
+          <a
+            href="/products"
+            class="rounded-lg border border-cream-200/40 px-6 py-3 font-semibold text-cream-50 transition hover:bg-spice-700"
+          >
+            Browse Products
+          </a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        {
+          FEATURED.slice(0, 4).map((p) => (
+            <div class="grid aspect-square place-items-center rounded-2xl bg-gradient-to-br from-spice-600 to-spice-700 text-6xl shadow-lg">
+              {p.emoji}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <section class="border-b border-spice-100 bg-cream-100">
+    <div class="mx-auto grid max-w-6xl gap-6 px-5 py-8 text-center sm:grid-cols-3">
+      <div>
+        <p class="font-serif text-2xl font-bold text-spice-700">Sourced at origin</p>
+        <p class="mt-1 text-sm text-spice-600">Direct from Tamil Nadu farmer clusters</p>
+      </div>
+      <div>
+        <p class="font-serif text-2xl font-bold text-spice-700">Export graded</p>
+        <p class="mt-1 text-sm text-spice-600">Cleaned, sorted and tested per lot</p>
+      </div>
+      <div>
+        <p class="font-serif text-2xl font-bold text-spice-700">Buyer first</p>
+        <p class="mt-1 text-sm text-spice-600">Flexible MOQs, packaging &amp; terms</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured products -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <div class="flex items-end justify-between">
+      <div>
+        <h2 class="font-serif text-3xl font-bold text-spice-800">Featured products</h2>
+        <p class="mt-2 text-spice-600">Our most requested lines, ready to ship.</p>
+      </div>
+      <a href="/products" class="hidden text-sm font-semibold text-spice-600 hover:text-gold-600 sm:block">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {FEATURED.map((p) => <ProductCard product={p} />)}
+    </div>
+  </section>
+
+  <!-- Origin story -->
+  <section class="bg-spice-50">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2 md:items-center">
+      <div class="grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-gold-400 to-gold-600 text-7xl shadow-md">
+        🌾
+      </div>
+      <div>
+        <h2 class="font-serif text-3xl font-bold text-spice-800">Rooted in Tamil Nadu</h2>
+        <p class="mt-4 leading-relaxed text-spice-700">
+          Tamil Nadu is home to some of India&rsquo;s most celebrated produce &mdash;
+          the GI-tagged Madurai Malli jasmine, the turmeric fields of Erode, and
+          spice belts across the south. We work close to these growers, so the
+          quality you order is the quality that ships.
+        </p>
+        <p class="mt-4 leading-relaxed text-spice-700">
+          As a trading company, our job is simple: understand what your market
+          needs, source it well, and make the export process painless.
+        </p>
+        <a href="/about" class="mt-6 inline-block font-semibold text-spice-600 hover:text-gold-600">
+          More about us &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <div class="rounded-3xl bg-spice-800 px-8 py-14 text-center text-cream-50">
+      <h2 class="font-serif text-3xl font-bold">Looking for a reliable supplier?</h2>
+      <p class="mx-auto mt-3 max-w-xl text-cream-200">
+        Tell us the product, quantity and destination. We&rsquo;ll get back with
+        specifications, pricing and lead time.
+      </p>
+      <a
+        href="/quote"
+        class="mt-7 inline-block rounded-lg bg-gold-500 px-7 py-3 font-semibold text-spice-900 transition hover:bg-gold-400"
+      >
+        Request a Quote
+      </a>
+    </div>
+  </section>
+</Base>

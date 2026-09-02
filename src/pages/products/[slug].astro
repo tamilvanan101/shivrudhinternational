@@ -1,0 +1,128 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PRODUCTS, productBySlug } from '../../data/products';
+
+export function getStaticPaths() {
+  return PRODUCTS.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const product = productBySlug(slug!);
+if (!product) {
+  return Astro.redirect('/products');
+}
+
+// Related = up to 3 other products.
+const related = PRODUCTS.filter((p) => p.slug !== product.slug).slice(0, 3);
+const quoteHref = `/quote?product=${encodeURIComponent(product.name)}`;
+---
+
+<Base
+  title={`${product.name} — Shivrudh International`}
+  description={product.summary}
+>
+  <!-- Breadcrumb -->
+  <div class="border-b border-spice-100 bg-cream-100">
+    <div class="mx-auto max-w-6xl px-5 py-3 text-sm text-spice-600">
+      <a href="/" class="hover:text-spice-800">Home</a>
+      <span class="mx-1.5 text-spice-300">/</span>
+      <a href="/products" class="hover:text-spice-800">Products</a>
+      <span class="mx-1.5 text-spice-300">/</span>
+      <span class="text-spice-800">{product.name}</span>
+    </div>
+  </div>
+
+  <section class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-2">
+    <!-- Visual -->
+    <div class="grid aspect-square place-items-center rounded-3xl bg-gradient-to-br from-spice-100 to-cream-200 text-[9rem] shadow-sm">
+      {product.emoji}
+    </div>
+
+    <!-- Detail -->
+    <div>
+      <span class="inline-block rounded-full bg-spice-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-spice-700">
+        {product.origin}
+      </span>
+      <h1 class="mt-4 font-serif text-4xl font-bold text-spice-800">{product.name}</h1>
+      {product.botanical && <p class="mt-1 text-sm italic text-spice-500">{product.botanical}</p>}
+      <p class="mt-4 text-lg font-medium text-gold-600">{product.tagline}</p>
+      <p class="mt-4 leading-relaxed text-spice-700">{product.description}</p>
+
+      <div class="mt-6">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-spice-500">Available as</h2>
+        <div class="mt-2 flex flex-wrap gap-2">
+          {
+            product.forms.map((f) => (
+              <span class="rounded-full bg-spice-50 px-3 py-1.5 text-sm font-medium text-spice-700">
+                {f}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={quoteHref}
+          class="rounded-lg bg-gold-500 px-6 py-3 font-semibold text-spice-900 shadow-sm transition hover:bg-gold-400"
+        >
+          Request a Quote
+        </a>
+        <a
+          href="/contact"
+          class="rounded-lg border border-spice-200 px-6 py-3 font-semibold text-spice-700 transition hover:bg-spice-50"
+        >
+          Contact us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section class="bg-spice-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <h2 class="font-serif text-2xl font-bold text-spice-800">Specifications</h2>
+      <div class="mt-6 overflow-hidden rounded-2xl border border-spice-100 bg-white">
+        <table class="w-full text-left text-sm">
+          <tbody>
+            {
+              product.specs.map((s, i) => (
+                <tr class:list={[i % 2 === 1 && 'bg-cream-50']}>
+                  <th class="w-1/3 px-5 py-3.5 font-semibold text-spice-700">{s.label}</th>
+                  <td class="px-5 py-3.5 text-spice-700/90">{s.value}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-spice-500">
+        Specifications vary by lot and season. Share your target spec and we will
+        confirm availability.
+      </p>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <h2 class="font-serif text-2xl font-bold text-spice-800">Other products</h2>
+    <div class="mt-6 grid gap-6 sm:grid-cols-3">
+      {
+        related.map((p) => (
+          <a
+            href={`/products/${p.slug}`}
+            class="group flex items-center gap-4 rounded-xl border border-spice-100 bg-white p-4 transition hover:shadow-md"
+          >
+            <span class="grid h-14 w-14 shrink-0 place-items-center rounded-lg bg-spice-50 text-3xl">
+              {p.emoji}
+            </span>
+            <span>
+              <span class="block font-semibold text-spice-800 group-hover:text-gold-600">{p.name}</span>
+              <span class="block text-xs text-spice-500">{p.origin}</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</Base>

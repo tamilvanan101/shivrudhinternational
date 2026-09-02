@@ -1,0 +1,61 @@
+---
+const { pathname } = Astro.url;
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/products', label: 'Products' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-spice-100 bg-cream-50/90 backdrop-blur">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+    <a href="/" class="flex items-center gap-2.5 group">
+      <span
+        class="grid h-9 w-9 place-items-center rounded-lg bg-spice-600 font-serif text-lg font-bold text-cream-50 transition group-hover:bg-spice-700"
+      >
+        S
+      </span>
+      <span class="leading-tight">
+        <span class="block font-serif text-lg font-semibold text-spice-800">Shivrudh International</span>
+        <span class="block text-[11px] uppercase tracking-widest text-spice-500">Tamil Nadu Spice Exports</span>
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class:list={[
+              'rounded-md px-3.5 py-2 text-sm font-medium transition',
+              isActive(l.href)
+                ? 'bg-spice-100 text-spice-800'
+                : 'text-spice-700 hover:bg-spice-50',
+            ]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <a
+        href="/quote"
+        class="ml-2 rounded-md bg-gold-500 px-4 py-2 text-sm font-semibold text-spice-900 shadow-sm transition hover:bg-gold-400"
+      >
+        Request a Quote
+      </a>
+    </div>
+
+    <!-- Mobile: quote button only, keeps the bar clean -->
+    <a
+      href="/quote"
+      class="rounded-md bg-gold-500 px-3.5 py-2 text-sm font-semibold text-spice-900 md:hidden"
+    >
+      Quote
+    </a>
+  </nav>
+</header>

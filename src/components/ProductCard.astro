@@ -1,0 +1,44 @@
+---
+import type { Product } from '../data/products';
+
+interface Props {
+  product: Product;
+}
+const { product } = Astro.props;
+---
+
+<a
+  href={`/products/${product.slug}`}
+  class="group flex flex-col overflow-hidden rounded-2xl border border-spice-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+>
+  <div class="relative aspect-[4/3] overflow-hidden bg-cream-100">
+    <!-- Emoji tile fallback until real product photos are dropped in /public/products -->
+    <div
+      class="grid h-full w-full place-items-center bg-gradient-to-br from-spice-100 to-cream-200 text-6xl transition group-hover:scale-105"
+    >
+      {product.emoji}
+    </div>
+    <span
+      class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-spice-700"
+    >
+      {product.origin}
+    </span>
+  </div>
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="font-serif text-lg font-semibold text-spice-800">{product.name}</h3>
+    {product.botanical && <p class="mt-0.5 text-xs italic text-spice-500">{product.botanical}</p>}
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-spice-700/90">{product.summary}</p>
+    <div class="mt-4 flex flex-wrap gap-1.5">
+      {
+        product.forms.map((f) => (
+          <span class="rounded-full bg-spice-50 px-2.5 py-1 text-[11px] font-medium text-spice-600">
+            {f}
+          </span>
+        ))
+      }
+    </div>
+    <span class="mt-4 text-sm font-semibold text-spice-600 group-hover:text-gold-600">
+      View details &rarr;
+    </span>
+  </div>
+</a>

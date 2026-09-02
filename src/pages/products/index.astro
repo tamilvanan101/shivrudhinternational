@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { PRODUCTS } from '../../data/products';
+---
+
+<Base title="Products — Shivrudh International" description="Browse our range of Tamil Nadu spices and agri produce: jasmine, turmeric, dried red chilli, black pepper, cardamom and moringa.">
+  <section class="border-b border-spice-100 bg-spice-800 text-cream-50">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <span class="inline-block rounded-full bg-spice-700 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-gold-400">
+        Our catalogue
+      </span>
+      <h1 class="mt-4 font-serif text-4xl font-bold">Products</h1>
+      <p class="mt-3 max-w-2xl text-cream-200">
+        Every line is sourced from Tamil Nadu and South India, graded for export,
+        and available in the forms your market needs. Request a quote for
+        specifications, pricing and lead time.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {PRODUCTS.map((p) => <ProductCard product={p} />)}
+    </div>
+  </section>
+</Base>

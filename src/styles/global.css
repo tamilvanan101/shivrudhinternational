@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/source-serif-4';
+
+/*
+ * Shivrudh International design tokens.
+ * Warm, earthy palette: deep spice-green + turmeric gold on a cream base.
+ */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+
+  /* Brand greens */
+  --color-spice-50: #f3f7f1;
+  --color-spice-100: #e2ecdd;
+  --color-spice-200: #c4d8bc;
+  --color-spice-300: #9dbd90;
+  --color-spice-400: #729c63;
+  --color-spice-500: #517d44;
+  --color-spice-600: #3d6333;
+  --color-spice-700: #314f2a;
+  --color-spice-800: #294024;
+  --color-spice-900: #22351f;
+
+  /* Turmeric gold accents */
+  --color-gold-400: #f2c14e;
+  --color-gold-500: #e6a817;
+  --color-gold-600: #c8890f;
+
+  /* Cream neutrals */
+  --color-cream-50: #fdfbf6;
+  --color-cream-100: #f8f3e8;
+  --color-cream-200: #efe6d3;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream-50);
+  color: var(--color-spice-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
